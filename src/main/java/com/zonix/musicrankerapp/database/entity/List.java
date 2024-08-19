@@ -1,4 +1,4 @@
-package com.zonix.musicrankerapp.entity;
+package com.zonix.musicrankerapp.database.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,20 +6,27 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
-@Table(name="music_genres")
-public class MusicGenre {
+@Table(name = "lists")
+public class List {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "list_id")
     private Long id;
 
     @ManyToOne
-    private Music music;
+    private User user;
 
-    @ManyToOne
-    private Genre genre;
+    private String title;
+
+    private String description;
+
+    private LocalDate dateCreated;
 }
