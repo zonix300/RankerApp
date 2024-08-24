@@ -22,12 +22,15 @@ public class Rating {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @OneToOne
+    @JoinColumn(name = "album_id")
     private Album album;
 
     @OneToOne
+    @JoinColumn(name = "track_id")
     private Track track;
 
     private Integer rating;

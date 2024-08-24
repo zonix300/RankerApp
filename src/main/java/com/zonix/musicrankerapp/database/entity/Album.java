@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -31,8 +33,13 @@ public class Album{
 
     private String coverArt;
 
-    @ManyToOne
-    private Genre genre;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "albums_genres",
+            joinColumns = @JoinColumn(name = "genre_id"),
+            inverseJoinColumns = @JoinColumn(name = "album_id")
+    )
+    private List<Genre> albumGenres = new ArrayList<>();
 
     private String description;
 

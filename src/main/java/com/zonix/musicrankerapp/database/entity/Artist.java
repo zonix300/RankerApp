@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -28,6 +29,10 @@ public class Artist {
 
     private String activeYears;
 
-    @OneToMany
-    private ArrayList<Genre> genres = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "artists_genres",
+            joinColumns = @JoinColumn(name = "genre_id"),
+            inverseJoinColumns = @JoinColumn(name = "artist_id")
+    )
+    private List<Genre> genres = new ArrayList<>();
 }

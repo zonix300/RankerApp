@@ -6,16 +6,21 @@ import com.zonix.musicrankerapp.dto.UserReadDto;
 import com.zonix.musicrankerapp.mapper.UserCreateEditMapper;
 import com.zonix.musicrankerapp.mapper.UserReadMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class UserService {
+public class UserService implements UserDetailsService {
 
 
     private final UserRepository userRepository;
@@ -61,4 +66,13 @@ public class UserService {
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username)
+                .map(user -> new User(
+                        user.getUsername(),
+                        user.getPassword(),
+                        Collections.singleton(user.getRole())
+                )).orElseThrow(() -> new UsernameNotFoundException("Failed to retrieve user:" + username));
+    }
 }

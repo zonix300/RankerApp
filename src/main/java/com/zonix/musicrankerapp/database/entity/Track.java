@@ -20,6 +20,7 @@ public class Track {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "album_id")
     private Album album;
 
     private String title;

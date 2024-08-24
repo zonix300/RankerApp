@@ -22,9 +22,11 @@ public class Review {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
+    @JoinColumn(name = "album_id")
     private Album album;
 
     private String reviewText;

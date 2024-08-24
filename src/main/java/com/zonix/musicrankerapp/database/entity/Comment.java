@@ -21,18 +21,23 @@ public class Comment {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
+    @JoinColumn(name = "review_id")
     private Review review;
 
     @ManyToOne
+    @JoinColumn(name = "album_id")
     private Album album;
 
     @ManyToOne
+    @JoinColumn(name = "track_id")
     private Track track;
 
     private String text;
 
+    @JoinColumn(name = "date_posted")
     private LocalDate datePosted;
 }

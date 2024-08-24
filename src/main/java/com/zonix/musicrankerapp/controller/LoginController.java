@@ -11,19 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/api/v1/login")
-@RequiredArgsConstructor
+@RequestMapping
 public class LoginController {
 
-    private final UserService userService;
-
-    @GetMapping
+    @GetMapping("/login")
     public String loginPage() {
         return "login";
     }
 
-    @PostMapping
-    public String login(Model model, @ModelAttribute("login") LoginDto loginDto) {
-        return "redirect:/login";
-    }
+
 }

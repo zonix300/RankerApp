@@ -22,13 +22,16 @@ public class ListItem {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "list_id")
     private List list;
 
     @OneToOne
+    @JoinColumn(name = "album_id")
     private Album album;
 
     @OneToMany
-    private ArrayList<Track> track = new ArrayList<>();
+    @JoinColumn(name = "track_id")
+    private java.util.List<Track> track = new ArrayList<>();
 
     private Integer position;
 

@@ -10,16 +10,16 @@ import org.springframework.stereotype.Component;
 public class UserReadMapper implements Mapper<User, UserReadDto> {
 
     @Override
-    public UserReadDto map(User object) {
+    public UserReadDto map(User source) {
         return new UserReadDto(
-                object.getId(),
-                object.getUsername(),
-                object.getEmail(),
-                object.getPassword(),
-                object.getDateJoined(),
-                object.getLastLogin(),
-                object.getProfileInfo(),
-                object.getRole()
+                source.getId(),
+                source.getUsername(),
+                source.getEmail(),
+                source.getPassword(),
+                source.getDateJoined(),
+                source.getLastLogin(),
+                source.getProfileInfo(),
+                source.getRole()
         );
     }
 }
